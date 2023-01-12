@@ -1,0 +1,51 @@
+= Designing a new structure for this game
+
+== Installation
+
+Download this repo with:
+
+`git clone [this repo]`
+
+== Usage
+
+Play the game with:
+
+`bin/play`
+
+OR
+
+`ruby bin/play`
+
+== CRC design
+
+                                         STORAGE CLASS
+       +------------------+           +------------------+          +------------------+
+       |      GAME        |           |      BOARD       |          |      PLAYER      |
+       +------------------+           +------------------+          +------------------+
+       |                  |           |* responsible for |          |* responsible     |
+       |                  |           | keeping track    |          |  for providing   |
+       |                  <|---------+| of plays on      |          |  location for    |
+       |* says which      |           | board            |          |  move            |
+       |  players turn    |           |                  |          |                  |
+       |  it is           |           |                  |          |                  |
+       |* maintains rules |           |                  <|---------+                  |
+       |                  |           |                  |          |                  |
+       +----.--------+----+           +------------------+          +---.--------------+
+           /_\       |                                                 /_\ 
+            |        +--------------------------------------------------+
+            |
+            +------------------------+
+                                     |
+                 SCRIPT              |
+         \\\\\\\\\\\\\\\\\\\\\\\     |
+         \ +---------------------+   |
+         \ |+-------------------+|   |
+         \ || * responsible for ||   |
+         \ ||   prompt          ||   |
+         \ ||   and input       |+---+
+         \ ||                   ||
+            +-------------------+
+
+
+---- ✂  Snip Snip  ✂  ----
+
