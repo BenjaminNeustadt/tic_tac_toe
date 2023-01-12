@@ -9,12 +9,8 @@ RSpec.describe Board do
 
   it ' is an array of arrays' do
     board = Board.new
-		expected =
-			[
-				[".", ".", "."],
-				[".", ".", "."],
-				[".", ".", "."]
-		]
+		expected = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
+
 		actual = board.display
     expect(actual).to eq expected
   end
