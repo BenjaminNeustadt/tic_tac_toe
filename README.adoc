@@ -49,3 +49,37 @@ OR
 
 ---- ✂  Snip Snip  ✂  ----
 
+[source, ruby]
+----
+def start
+  instructions<1>
+  unless game_over <1>
+    board.display<2>
+    @current_player.get_move<3>
+    if move-checker redo<2>
+    place(@current_player.move, @current_player.marker)<1>
+      switchPlayers<1>
+  end
+end
+----
+<1> # GAME CLASS
+<2> # BOARD CLASS
+<3> # PLAYER CLASS
+
+== DRAFT_NOTES
+
+.Option_1
+[source, ruby]
+----
+def switch_player
+  board.set_up.index[!false].length % 2 ? current_player = player_1
+end
+----
+
+.Option_2
+[source, ruby]
+----
+@current_player == player_1 ? @current_player == player_2 :
+@current_player == player_1
+@current_player == player_1 ? @current_player = player_2 : @current_player = player_1
+----
