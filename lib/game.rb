@@ -3,22 +3,15 @@ require_relative './board'
 class Game
 
   def initialize
-    @board = Board.new.display
+    @board = Board.new.set_up
   end
 
 attr_reader :board
 
-
-  def place(position)
-
-    if position == 1 
-      @board = ["x", nil, nil, nil, nil, nil, nil, nil, nil]
-    elsif position == 2
-      @board = [nil, "x", nil, nil, nil, nil, nil, nil, nil]
-    elsif position == 9
-      @board = [nil, nil, nil, nil, nil, nil, nil, nil, "x"]
-    end
-
+  def place(position, marker)
+    board[position] = marker unless board[position]
   end
 
 end
+
+

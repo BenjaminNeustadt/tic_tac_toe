@@ -9,31 +9,27 @@ RSpec.describe Game do
     end
   end
 
-  context 'place method' do
-    it 'is able to add a piece to position 1' do
+  context '#place' do
+
+    it 'changes state of the board' do
       game = Game.new
-      game.place(1)
-      expected = ["x", nil, nil, nil, nil, nil, nil, nil, nil]
-      actual = game.board
-      expect(actual).to eq expected
+      expect(game.place(2, marker = 'X')).to eq "X"
+      expect(game.place(2, marker = 'X')).to eq nil
     end
 
-    it 'is able to add a piece to position 2' do
+    it 'returns the marker if the spot is played' do
       game = Game.new
-      game.place(2)
-      expected = [nil, "x", nil, nil, nil, nil, nil, nil, nil]
-      actual = game.board
-      expect(actual).to eq expected
+      expect(game.place(0, marker = 'O')).to eq 'O'
     end
 
-    it 'is able to add a piece to position 9' do
+    it 'returns nil if the spot is not playable' do
       game = Game.new
-      game.place(9)
-      expected = [nil, nil, nil, nil, nil, nil, nil, nil, "x"]
-      actual = game.board
-      expect(actual).to eq expected
+      game.place(5, marker = 'X')
+      expect(game.place(5, marker = 'O')).to eq nil
     end
+
   end
 
 
 end
+

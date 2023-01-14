@@ -1,9 +1,10 @@
 class Board
 
   def initialize
-    @display = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    @set_up= Array.new(9, false)
   end
 
-attr_reader :display
+attr_reader :set_up
 
 end
+
