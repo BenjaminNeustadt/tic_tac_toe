@@ -1,10 +1,20 @@
 class Board
 
   def initialize
-    @set_up= Array.new(9, false)
+    @layout = Array.new(9, false)
   end
 
-attr_reader :set_up
+  attr_reader :layout
+
+  # writer
+  def mark=(args)
+    position, token = args
+    @layout[position] = token
+  end
+
+  # reader
+  def mark(position)
+    layout[position]
+  end
 
 end
-

@@ -54,10 +54,10 @@ OR
 def start
   instructions<1>
   unless game_over <1>
-    board.display<2>
-    @current_player.get_move<3>
+    board.display<4>
+    current_player.get_move<3>
     if move-checker redo<2>
-    place(@current_player.move, @current_player.marker)<1>
+    place(current_player.move, current_player.marker)<1>
       switchPlayers<1>
   end
 end
@@ -65,6 +65,7 @@ end
 <1> # GAME CLASS
 <2> # BOARD CLASS
 <3> # PLAYER CLASS
+<4> # REPORT CLASS
 
 == DRAFT_NOTES
 
@@ -79,7 +80,18 @@ end
 .Option_2
 [source, ruby]
 ----
-@current_player == player_1 ? @current_player == player_2 :
-@current_player == player_1
 @current_player == player_1 ? @current_player = player_2 : @current_player = player_1
 ----
+
+----
+def initialize
+end
+
+public
+
+def toggle_player
+  @current_player = @current_player == player_2 ? player_1 : player_2
+end
+----
+
+The board should not know anything about the player
