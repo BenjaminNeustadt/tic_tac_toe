@@ -13,44 +13,51 @@ class Game
     @board = Array.new(9, false)
     @player_1 = Player.new(MARKER[:player_1])
     @player_2 = Player.new(MARKER[:player_2])
-    @current_player = current_player
+    toggle_player
   end
 
-  attr_reader :board, :player_1, :player_2, :current_player
-  attr_accessor :current_player
+  attr_writer :current_player
 
   public
+
+  attr_reader :board, :player_1, :player_2, :current_player
 
   def place(position, marker)
     board.mark(position, marker) unless board[position]
   end
 
   def mark(position, token)
-    @board[position] = token
+    board[position] = token
   end
 
   def toggle_player
-    @current_player = @current_player == player_2 ? player_1 : player_2
+    self.current_player = current_player == player_1 ? player_2 : player_1
   end
 
-  def check_winner(board)
+  def game_over?
+    check_winner || check_draw
+  end
 
-    winning_sequences = [LINE[:row][:top], LINE[:row][:middle], LINE[:row][:bottom], LINE[:column][:left], LINE[:column][:middle], LINE[:column][:right], LINE[:diagonal][:left], LINE[:diagonal][:right] ]
+  def check_winner
 
-    player_1_elements = ['X', 'X', 'X']
-    player_2_elements = ['O', 'O', 'O']
+    winning_sequences = LINE.values.flat_map { |combination| combination.values }
 
-    player_2_wins = winning_sequences.each { |win_combo| win_combo.zip(player_2_elements).all? {|position, element| board[position] == element} }
-    player_1_wins = winning_sequences.each { |win_combo| win_combo.zip(player_1_elements).all? {|position, element| board[position] == element} }
+    player_1_elements = Array.new(3, player_1.to_s)
+    player_2_elements = Array.new(3, player_2.to_s)
 
-    if player_1_wins
-      "Winner player 1"
-    end
+    report_winner(
+      winning_sequences.any? { |win_combination| win_combination.zip(player_1_elements).all? {|position, element| board[position] == element} },
+      winning_sequences.any? { |win_combination| win_combination.zip(player_2_elements).all? {|position, element| board[position] == element} }
+    )
+  end
 
-    if player_2_wins
-      "Winner player 2"
-    end
+  def report_winner(*args)
+    player_1_wins, player_2_wins = args
+    player_1_wins && "#{player_1.to_s} Wins" || player_2_wins && "#{player_2.to_s} Wins"
+  end
 
+  def check_draw
+    board.all? && "The Game is a Draw" unless check_winner
   end
 
 end
