@@ -76,6 +76,7 @@ def switch_player
   board.set_up.index[!false].length % 2 ? current_player = player_1
 end
 ----
+not this one
 
 .Option_2
 [source, ruby]
