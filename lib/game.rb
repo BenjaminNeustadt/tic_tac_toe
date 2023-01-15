@@ -31,12 +31,36 @@ class Game
     @current_player = @current_player == player_2 ? player_1 : player_2
   end
 
-  def over_winner(board)
+  def check_winner(board)
 
     LINE = {row: {top: [0, 1, 2] , middle: [3, 4, 5], bottom: [6, 7, 8]}, column: {left: [0, 3, 6], middle: [1, 4, 7], right: [2, 5, 8]}, diagonal: {left: [0, 4, 8], right: [2, 4, 6]}}
 
+    winning_sequences = [LINE[:row][:top], LINE[:row][:middle], LINE[:row][:bottom], LINE[:column][:left], LINE[:column][:middle], LINE[:column][:right], LINE[:diagonal][:left], LINE[:diagonal][:right] ]
+
     player_1_elements = ['X', 'X', 'X']
     player_2_elements = ['O', 'O', 'O']
+
+    # check player 1 win
+
+    player_1_wins =
+    winning_sequences.each do |winning_combination|
+      winning_combination.zip(player_1_elements).all? {|position, element| board[position] == element}
+    end
+
+    # if any are true then it should puts
+    # "player 1 wins!"
+
+    # check player 2 win
+
+    player_2_wins =
+    winning_sequences.each do |combination|
+      combination.zip(player_2_elements).all? {|position, element| board[position] == element}
+    end
+
+    player_2_wins = winning_sequences.each { |win_combo| win_combo.zip(player_2_elements).all? {|position, element| board[position] == element} }
+
+    # if any are true then it should puts
+    # "player 2 wins!"
 
     ## ROWS
     # check top row win
@@ -66,14 +90,12 @@ class Game
 
     ## DIAGONALS
     # check left diagonal
-    win_left_diagnoal_p1  = LINE[:diagonal][:left].zip(player_1_elements).all? {|position, element| board[position] == element}
+    win_left_diagnoal_p1 = LINE[:diagonal][:left].zip(player_1_elements).all? {|position, element| board[position] == element}
     win_left_diagonal_p2 = LINE[:diagonal][:left].zip(player_2_elements).all? {|position, element| board[position] == element}
 
     # check right diagonal
     win_right_diagnoal_p1 = LINE[:diagonal][:right].zip(player_1_elements).all? {|position, element| board[position] == element}
     win_right_diagonal_p2 = LINE[:diagonal][:right].zip(player_2_elements).all? {|position, element| board[position] == element}
-
-    
 
   end
 
