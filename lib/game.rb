@@ -30,12 +30,12 @@ class Game
 
   attr_reader :board, :player_1, :player_2, :current_player
 
-  def place(position, marker)
-    board.mark(position, marker) unless board[position]
+  def place(position)
+    (mark(position) && toggle_player) unless board[position]
   end
 
-  def mark(position, token)
-    board[position] = token
+  def mark(position)
+    board[position] = current_player.to_s
   end
 
   def toggle_player
