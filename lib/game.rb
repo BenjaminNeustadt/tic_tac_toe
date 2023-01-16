@@ -1,13 +1,14 @@
+require 'colorize'
 require_relative './board'
 require_relative './player'
 
 class Game
 
   PROMPT = {
-    rules:  'Get three tokens in a row to win the game',
-    player: 'Next player is: %<player>s',
-    draw:   'Game is a draw',
-    win:    '%<player>s Wins'
+    rules:  'Get three tokens in a row to win the game:'.yellow,
+    player: 'Next player is: %<player>s'.cyan,
+    draw:   'Game is a draw!'.yellow,
+    win:    'The game is won by player %<player>s!'.yellow
   }
 
   BOARD = <<~BOARD
@@ -44,8 +45,8 @@ class Game
 
   def initialize
     @board = Array.new(9, false)
-    @player_1 = Player.new(MARKER[:player_1])
-    @player_2 = Player.new(MARKER[:player_2])
+    @player_1 = Player.new(MARKER[:player_1], colour: :red)
+    @player_2 = Player.new(MARKER[:player_2], colour: :green)
     toggle_player
   end
 
@@ -88,6 +89,10 @@ class Game
     player_1_wins, player_2_wins = args
     player_1_wins && PROMPT[:win] % {player: player_1} ||
     player_2_wins && PROMPT[:win] % {player: player_2}
+  end
+
+  def rules
+    PROMPT[:rules]
   end
 
   def check_draw
