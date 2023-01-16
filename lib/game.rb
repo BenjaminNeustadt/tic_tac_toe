@@ -3,6 +3,13 @@ require_relative './player'
 
 class Game
 
+  PROMPT = {
+    rules:  'Get three tokens in a row to win the game',
+    player: 'Next player is: %<player>s',
+    draw:   'Game is a draw',
+    win:    '%<player>s Wins'
+  }
+
   BOARD = <<~BOARD
    %s || %s || %s
   -------------
@@ -79,15 +86,16 @@ class Game
 
   def report_winner(*args)
     player_1_wins, player_2_wins = args
-    player_1_wins && "#{player_1.to_s} Wins" || player_2_wins && "#{player_2.to_s} Wins"
+    player_1_wins && PROMPT[:win] % {player: player_1} ||
+    player_2_wins && PROMPT[:win] % {player: player_2}
   end
 
   def check_draw
-    board.all? && "The Game is a Draw" unless check_winner
+    board.all? && PROMPT[:draw] unless check_winner
   end
 
   def report_board
-    BOARD % board.map { |mark| mark || ' '} << "Next player is: #{current_player}"
+    BOARD % board.map { |mark| mark || ' '} << PROMPT[:player] % {player: current_player}
   end
 
 end
