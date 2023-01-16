@@ -11,9 +11,27 @@ class Game
    %s || %s || %s
   BOARD
 
-  MARKER = {player_1: 'X', player_2: 'O'}
+  MARKER = {
+    player_1: 'X',
+    player_2: 'O'
+  }
 
-  LINE = {row: {top: [0, 1, 2] , middle: [3, 4, 5], bottom: [6, 7, 8]}, column: {left: [0, 3, 6], middle: [1, 4, 7], right: [2, 5, 8]}, diagonal: {left: [0, 4, 8], right: [2, 4, 6]}}
+  LINE = {
+         row: {
+           top:  [0, 1, 2],
+        middle:  [3, 4, 5],
+        bottom:  [6, 7, 8]
+    },
+      column: {
+           left: [0, 3, 6],
+         middle: [1, 4, 7],
+          right: [2, 5, 8]
+    },
+    diagonal: {
+          left:  [0, 4, 8],
+         right:  [2, 4, 6]
+    }
+  }
 
   private
 
