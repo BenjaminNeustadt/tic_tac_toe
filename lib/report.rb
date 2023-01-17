@@ -17,7 +17,7 @@ module Report
   end
 
   def report_board
-    BOARD % board.each_with_index.map { |mark, index| mark || index } << PROMPT[:player] % {player: current_player}
+    BOARD % board.map.with_index(1) { |mark, index| mark || index } << PROMPT[:player] % {player: current_player}
   end
 
   def report_winner(*args)

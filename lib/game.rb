@@ -29,7 +29,7 @@ class Game
   attr_reader :board, :player_1, :player_2, :current_player
 
   def place(position)
-    (mark(position) && toggle_player) unless board[position]
+    (mark(position - 1) && toggle_player) unless board[position -1]
   end
 
   def mark(position)

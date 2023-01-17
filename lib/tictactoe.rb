@@ -13,7 +13,7 @@ module TicTacToe
     until status = game.game_over? do
 
       move = gets.to_i
-      if (0...game.board.size).include?(move)
+      if (1..game.board.size).include?(move)
         game.place(move)
         puts game.report_board
       else
