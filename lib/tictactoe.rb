@@ -13,8 +13,12 @@ module TicTacToe
     until status = game.game_over? do
 
       move = gets.to_i
-      game.place(move)
-      puts game.report_board
+      if (0...game.board.size).include?(move)
+        game.place(move)
+        puts game.report_board
+      else
+        puts "Please play within the range, try again."
+      end
     end
 
     puts status
