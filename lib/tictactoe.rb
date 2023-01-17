@@ -17,7 +17,7 @@ module TicTacToe
         game.place(move)
         puts game.report_board
       else
-        puts "Please play within the range, try again."
+        puts game.range_error
       end
     end
 
