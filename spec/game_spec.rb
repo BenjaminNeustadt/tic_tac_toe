@@ -25,6 +25,17 @@ RSpec.describe Game do
 
   context '#place' do
 
+    it "marks selected position on the board with current player's marker" do
+      @game.place(1)
+      expect(@game.board[0]).to eq @game.player_1.to_s
+    end
+
+    it "toggles the current player after a successful move" do
+      @game.place(1)
+      expect(@game.current_player).to eq @game.player_2
+    end
+
+
     xit 'changes state of the board' do
       game = Game.new
       expect(game.board.mark(2)).to eq false
