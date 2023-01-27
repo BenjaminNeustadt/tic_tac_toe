@@ -35,24 +35,9 @@ RSpec.describe Game do
       expect(@game.current_player).to eq @game.player_2
     end
 
-
-    xit 'changes state of the board' do
-      game = Game.new
-      expect(game.board.mark(2)).to eq false
-      game.place(2, marker = 'X')
-      expect(game.board.mark(2)).to eq 'X'
-    end
-
-    xit 'returns the marker if the spot is played' do
-      game = Game.new
-      game.place(0, marker = 'O')
-      expect(game.board.mark(0)).to eq 'O'
-    end
-
-    xit 'returns nil if the spot is not playable' do
-      game = Game.new
-      game.place(5, marker = 'X')
-      expect(game.place(5, marker = 'O')).to eq nil
+    it 'returns nil if the spot is not playable' do
+      @game.board[5] = true
+      expect(@game.place(6)).to be_nil
     end
 
   end
