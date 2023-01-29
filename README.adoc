@@ -1,22 +1,45 @@
-= Designing a new structure for this game
+= Tic Tac Toe Game (2 player)
+Benjamin Neustadt
+:source-highlighter: rouge
+:document-type: article 
+:toc:
 
 == Installation
 
-Download this repo with:
+Inside your terminal, download this repo with:
 
-`git clone [this repo]`
+`git clone https://github.com/BenjaminNeustadt/tic_tac_toe`
+
+To install the necessary dependencies:
+
+'bundle install'
 
 == Usage
 
 Play the game with:
 
-`bin/play`
+`bin/tictactoe`
 
 OR
 
-`ruby bin/play`
+`ruby bin/tictactoe`
+
+== Spec
+
+The testing framework used is RSpec.
+
+To run the tests:
+
+`rspec -fd`
+
+== Demo
+
+image::public/assets/tic_tac_toe.gif[]
 
 == CRC design
+
+Initial program design planning.
+
 
                                          STORAGE CLASS
        +------------------+           +------------------+          +------------------+
@@ -47,52 +70,4 @@ OR
             +-------------------+
 
 
----- ✂  Snip Snip  ✂  ----
 
-[source, ruby]
-----
-def start
-  instructions<1>
-  unless game_over <1>
-    board.display<4>
-    current_player.get_move<3>
-    if move-checker redo<2>
-    place(current_player.move, current_player.marker)<1>
-      switchPlayers<1>
-  end
-end
-----
-<1> # GAME CLASS
-<2> # BOARD CLASS
-<3> # PLAYER CLASS
-<4> # REPORT CLASS
-
-== DRAFT_NOTES
-
-.Option_1
-[source, ruby]
-----
-def switch_player
-  board.set_up.index[!false].length % 2 ? current_player = player_1
-end
-----
-not this one
-
-.Option_2
-[source, ruby]
-----
-@current_player == player_1 ? @current_player = player_2 : @current_player = player_1
-----
-
-----
-def initialize
-end
-
-public
-
-def toggle_player
-  @current_player = @current_player == player_2 ? player_1 : player_2
-end
-----
-
-The board should not know anything about the player
